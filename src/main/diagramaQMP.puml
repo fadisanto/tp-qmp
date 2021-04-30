@@ -1,0 +1,57 @@
+@startuml
+left to right direction
+skinparam backgroundColor transparent
+skinparam arrowFontColor royalblue
+skinparam arrowColor white
+
+class Prenda {
+    tipo: Tipo
+    material : Material
+    colorPrimario : Color
+    colorSecundario : Color
+    listaPrendas : List<Prendas>
+    prendaBorrador : Prenda
+    Prenda(tipo, material, colorPrimario, colorSecundario, trama)
+    guardarPrenda(prenda) : Prenda
+    validarPrenda(prenda) : Boolean
+}
+
+class PrendaLisa {
+    PrendaLisa(tipo, material, colorPrimario, colorSecundario, trama)
+}
+
+class Uniforme{
+    prendasUniforme: List<Prendas>
+    configurarUniforme(uniforme) : Uniforme
+}
+
+
+enum Material {
+    GABARDINA, NYLON, ALGODON, ...
+}
+class Tipo {
+    getCategoria() : Categoria
+}
+enum Categoria {
+    SUPERIOR, CALZADO, INFERIOR, ACCESORIO
+}
+
+enum Trama{
+    LISA, RAYADA, LUNARES, ESTAMPADO, CUADROS
+}
+
+class Color {
+  colorPrimario() : Color
+  colorSecundario() : Color
+}
+
+Prenda --> Color : colorPrimario
+Prenda --> Color : colorSecundario
+Prenda --> "1" Material
+Prenda --> "1" Trama
+Prenda ..> Categoria
+Prenda --> "1" Tipo
+Tipo --> "1" Categoria
+PrendaLisa --|> Prenda
+Uniforme --|> Prenda
+@enduml
